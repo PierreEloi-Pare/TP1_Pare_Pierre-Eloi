@@ -34,38 +34,29 @@ return new class extends Migration
             $table->id();
             $table->string('name', 50);
             $table->text('description');
-            $table->decimal('dailyPrice', 10, 2);
+            $table->decimal('daily_price', 10, 2);
 
-            $table->foreignId('categoryId')
-                ->constrained('categories')
-                ->cascadeOnDelete();
+            $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
         });
 
         Schema::create('equipment_sport', function (Blueprint $table) {
-            $table->foreignId('equipmentId')
-                ->constrained('equipment')
-                ->cascadeOnDelete();
+            $table->foreignId('equipment_id')->constrained('equipment')->cascadeOnDelete();
+            $table->foreignId('sport_id')->constrained('sports')->cascadeOnDelete();
+            $table->timestamp('created_at');
+            $table->timestamp('updated_at');
 
-            $table->foreignId('sportId')
-                ->constrained('sports')
-                ->cascadeOnDelete();
-
-            $table->primary(['equipmentId', 'sportId']);
+            $table->primary(['equipment_id', 'sport_id']);
         });
 
         Schema::create('rentals', function (Blueprint $table) {
             $table->id();
             $table->date('startDate');
             $table->date('endDate');
-            $table->decimal('totalPrice', 10, 2);
+            $table->decimal('total_price', 10, 2);
 
-            $table->foreignId('userId')
-                ->constrained('users')
-                ->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
 
-            $table->foreignId('equipmentId')
-                ->constrained('equipment')
-                ->cascadeOnDelete();
+            $table->foreignId('equipment_id')->constrained('equipment')->cascadeOnDelete();
         });
 
         Schema::create('reviews', function (Blueprint $table) {
@@ -73,13 +64,9 @@ return new class extends Migration
             $table->integer('rating');
             $table->text('comment');
 
-            $table->foreignId('userId')
-                ->constrained('users')
-                ->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
 
-            $table->foreignId('rentalId')
-                ->constrained('rentals')
-                ->cascadeOnDelete();
+            $table->foreignId('rental_id')->constrained('rentals')->cascadeOnDelete();
         });
     }
 
