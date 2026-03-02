@@ -11,6 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
+        //Lors de la remise 1, mes migrations n'étaient pas bien divisées, j'ai donc réusiné la sépération
+        //des migrations en créant un fichier pour chaque migrations
          Schema::create('sessions', function (Blueprint $table) { // Illuminate lançait une erreur si cette table n'était pas là, probablement à cause d'une config
             $table->string('id')->primary();
             $table->foreignId('user_id')->nullable()->index();

@@ -11,6 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
+        //Lors de la remise 1, mes migrations n'étaient pas bien divisées, j'ai donc réusiné la sépération
+        //des migrations en créant un fichier pour chaque migrations
         Schema::create('rentals', function (Blueprint $table) {
             $table->id();
             $table->date('start_date');
