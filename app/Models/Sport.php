@@ -3,9 +3,13 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Sport extends Model
 {
+    use HasFactory, Notifiable;
+
     protected $fillable = [
         'name',
     ];
@@ -15,8 +19,8 @@ class Sport extends Model
         return $this->belongsToMany(
             Equipment::class,
             'equipment_sport',
-            'sportId',
-            'equipmentId'
+            'sport_id',
+            'equipment_id'
         );
     }
 }

@@ -26,12 +26,12 @@ class User extends Authenticatable
 
     public function rentals()
     {
-        return $this->hasMany(Rental::class, 'userId');
+        return $this->hasMany(Rental::class, 'user_id');
     }
 
     public function reviews()
     {
-        return $this->hasMany(Review::class, 'userId');
+        return $this->hasMany(Review::class, 'user_id');
     }
 
 }

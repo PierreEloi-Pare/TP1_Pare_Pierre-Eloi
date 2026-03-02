@@ -3,23 +3,26 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Review extends Model
 {
+    use HasFactory, Notifiable;
      protected $fillable = [
         'rating',
         'comment',
         'userId',
-        'rentalId',
+        'rental_id',
     ];
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'userId');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function rental()
     {
-        return $this->belongsTo(Rental::class, 'rentalId');
+        return $this->belongsTo(Rental::class, 'rental_id');
     }
 }

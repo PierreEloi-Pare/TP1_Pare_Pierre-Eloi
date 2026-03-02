@@ -4,11 +4,10 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Faker\Factory as Faker;
-
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Equipment>
  */
-class UserFactory extends Factory
+class EquipmentFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,12 +16,12 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+
         $faker = Faker::create();
         return [
-            'firstName' => $faker->text(50),
-            'lastName' => $faker->text(50),
-            'email' => $faker->unique()->email(),
-            'phone' => $faker->unique()->phoneNumber(),
+            'name' => $faker->text(50),
+            'description' => $faker->text(),
+            'daily_price' => $faker->randomFloat(2,0,10)
         ];
     }
 }

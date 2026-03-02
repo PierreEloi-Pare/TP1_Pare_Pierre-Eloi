@@ -3,6 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Category;
+use App\Models\Equipment;
+use App\Models\Rental;
+use App\Models\Sport;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -23,5 +27,34 @@ class DatabaseSeeder extends Seeder
             EquipmentSeeder::class,     
             EquipmentSportSeeder::class 
         ]);
+
+        //https://laravel.com/docs/12.x/eloquent-factories
+
+        User::factory(10)
+         ->has(Rental::factory(2)
+            ->for(Equipment::factory()
+                ->for(Category::factory()))
+            )
+        ->create();
+
+    Sport::factory(10)->hasAttached(Equipment::factory(2)->for(Category::factory()))->create();
+    
+    //J'ai ensuite appris d'un collègue que ce seeding n'était plus requis et que cela avait été précisé en classe (tellement de temps perdu :/).
+    //Chaque jour suffit sa peine. Voici la requête que j'ai finalement demandé au LLM chatGPT après plus d'une heure de recherches sans fruits:
+
+    /* "What's the problem here? : SQLSTATE[HY000]: General error: 1 duplicate column name: created_at (Connection: sqlite, Database: 
+    C:\Bureau\Cegep\Session_4\Service_Web\tps\TP1_Pare_Pierre-Eloi\database\database.sqlite, SQL: create table "equipment_sport" 
+    ("equipment_id" integer not null, "sport_id" integer not null, "created_at" datetime not null, "updated_at" datetime not null, 
+    "created_at" datetime, "updated_at" datetime, foreign key("equipment_id") references "equipment"("id") on delete cascade, 
+    foreign key("sport_id") references "sports"("id") on delete cascade, primary key ("equipment_id", "sport_id"))) at 
+    vendor\laravel\framework\src\Illuminate\Database\Connection.php:838 834▕ $exceptionType = $this->isUniqueConstraintError($e) 835▕
+    ? UniqueConstraintViolationException::class 836▕ : QueryException::class; 837▕ ➜ 838▕ throw new $exceptionType( 839▕
+    $this->getNameWithReadWriteType(), 840▕ $query, 841▕ $this->prepareBindings($bindings), 842▕ $e, 
+    1 vendor\laravel\framework\src\Illuminate\Database\Connection.php:578 PDOException::("SQLSTATE[HY000]: 
+    General error: 1 duplicate column name: created_at") 2 vendor\laravel\framework\src\Illuminate\Database\Connection.php:578 
+    PDO::prepare("create table "equipment_sport" ("equipment_id" integer not null, "sport_id" integer not null, "created_at" datetime not null, 
+    "updated_at" datetime not null, "created_at" datetime, "updated_at" datetime, foreign key("equipment_id") references "equipment"("id") on delete cascade, 
+    foreign key("sport_id") references "sports"("id") on delete cascade, primary key ("equipment_id", "sport_id"))")*/
+
     }
 }

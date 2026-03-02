@@ -23,11 +23,13 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('name', 50);
+            $table->timestamps();
         });
 
         Schema::create('sports', function (Blueprint $table) {
             $table->id();
             $table->string('name', 50);
+            $table->timestamps();
         });
 
         Schema::create('equipment', function (Blueprint $table) {
@@ -37,26 +39,26 @@ return new class extends Migration
             $table->decimal('daily_price', 10, 2);
 
             $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
+            $table->timestamps();
         });
 
         Schema::create('equipment_sport', function (Blueprint $table) {
             $table->foreignId('equipment_id')->constrained('equipment')->cascadeOnDelete();
             $table->foreignId('sport_id')->constrained('sports')->cascadeOnDelete();
-            $table->timestamp('created_at');
-            $table->timestamp('updated_at');
-
             $table->primary(['equipment_id', 'sport_id']);
+            $table->timestamps();
         });
 
         Schema::create('rentals', function (Blueprint $table) {
             $table->id();
-            $table->date('startDate');
-            $table->date('endDate');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->decimal('total_price', 10, 2);
 
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
 
             $table->foreignId('equipment_id')->constrained('equipment')->cascadeOnDelete();
+            $table->timestamps();
         });
 
         Schema::create('reviews', function (Blueprint $table) {
@@ -67,6 +69,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
 
             $table->foreignId('rental_id')->constrained('rentals')->cascadeOnDelete();
+            $table->timestamps();
         });
     }
 
