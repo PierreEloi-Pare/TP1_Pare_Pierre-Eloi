@@ -30,6 +30,17 @@ return new class extends Migration
             $table->string('name', 50);
         });
 
+        Schema::create('equipment', function (Blueprint $table) {
+            $table->id();
+            $table->string('name', 50);
+            $table->text('description');
+            $table->decimal('dailyPrice', 10, 2);
+
+            $table->foreignId('categoryId')
+                ->constrained('categories')
+                ->cascadeOnDelete();
+        });
+
         Schema::create('equipment_sport', function (Blueprint $table) {
             $table->foreignId('equipmentId')
                 ->constrained('equipment')
