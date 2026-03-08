@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Equipment;
 use App\Models\Rental;
 use App\Models\Sport;
+use App\Models\Review;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -34,6 +35,8 @@ class DatabaseSeeder extends Seeder
          ->has(Rental::factory(2)
             ->for(Equipment::factory()
                 ->for(Category::factory()))
+            ->has(Review::factory(2) //Les reviews ont étés ajoutés plus tard dans la partie 2 simplement pour compléter un peu mieux le seeding. 
+                ->for(User::factory()))
             )
         ->create();
 
