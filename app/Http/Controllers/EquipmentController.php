@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AveragePriceRequest;
+use App\Http\Requests\UserRequest;
 use App\Http\Resources\EquipmentResource;
 use App\Models\Equipment;
 use App\Models\Rental;
@@ -12,9 +12,19 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class EquipmentController extends Controller
 {
-    public function index(){
+    public function index(UserRequest $request){
         try{
-            return EquipmentResource::collection(Equipment::all())->response()->setStatusCode(200);
+            $request->validated();
+            $equipments = Equipment::paginate(20);
+
+             if ($request->minDate) {
+                $equipments->where('end_date', '>=', $request->minDate);
+            }
+
+            if ($request->maxDate) {
+                $equipments->where('end_date', '<=', $request->maxDate);
+            }
+            return EquipmentResource::collection($equipments)->response()->setStatusCode(200);
         } catch (Exception $ex){
             abort(500, 'Internal Server Error');
         }
@@ -56,9 +66,8 @@ class EquipmentController extends Controller
         }
     }
 
-    public function averagePrice(AveragePriceRequest $request, $id){
+    public function averagePrice($id){
         try {
-            $request->validated();
             Equipment::findOrFail($id);
 
             $query = Rental::whereNotNull('end_date'); 
@@ -66,26 +75,11 @@ class EquipmentController extends Controller
             //src: https://stackoverflow.com/questions/21281504/how-do-you-check-if-not-null-with-eloquent
             $query = $query->where('equipment_id', $id);
 
-            if ($request->minDate) {
-                $query->where('end_date', '>=', $request->minDate);
-            }
-
-            if ($request->maxDate) {
-                $query->where('end_date', '<=', $request->maxDate);
-            }
-
-            if ($request->maxTotalPrice) {
-                $query->where('totalPrice', '<=', $request->maxTotalPrice);
-            }
-
             $avgPrice = $query->avg('total_price');
-
-            $rentals = $query->paginate(20);
 
             return response()->json([
                 'equipment_id' => $id,
                 'average_price' => $avgPrice,
-                'rentals' => $rentals
             ], 200);
 
         } catch (ModelNotFoundException $ex) {

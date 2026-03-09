@@ -1,0 +1,169 @@
+{
+  "info": {
+    "_postman_id": "1d7457e6-bd98-45cc-bbb6-6a5d18cebe22",
+    "name": "TP1 Pierre-Eloi Pare",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52344836",
+    "_collection_link": "https://go.postman.co/collection/52344836-1d7457e6-bd98-45cc-bbb6-6a5d18cebe22?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "List all equipments",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "List single equipment",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "Popularity of single equipment",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "Average Rental of equipment",
+      "request": {
+        "method": "GET",
+        "header": []
+      },
+      "response": []
+    },
+    {
+      "name": "Create user",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"firstName\": \"Jonh\",\r\n    \"lastName\": \"PHP\",\r\n    \"email\": \"superduperemailorsomethingidk@csfoy.ca\",\r\n    \"phone\": \"999-999-9999\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/users",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "users"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update un user",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"firstName\": \"Jonh\",\r\n    \"lastName\": \"PHP\",\r\n    \"email\": \"superduperemailorsomethingidk@csfoy.ca\",\r\n    \"phone\": \"999-999-9999\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/users/1",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "users",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete une review",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"firstName\": \"Jonh\",\r\n    \"lastName\": \"PHP\",\r\n    \"email\": \"superduperemailorsomethingidk@csfoy.ca\",\r\n    \"phone\": \"999-999-9999\"\r\n}"
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/reviews/1",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "reviews",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

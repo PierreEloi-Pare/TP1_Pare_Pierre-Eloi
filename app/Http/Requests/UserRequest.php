@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AveragePriceRequest extends FormRequest
+class UserRequest extends FormRequest
 {
     public function authorize(): bool
     {
