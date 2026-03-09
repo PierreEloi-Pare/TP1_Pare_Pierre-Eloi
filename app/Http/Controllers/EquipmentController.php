@@ -60,7 +60,9 @@ class EquipmentController extends Controller
         try {
             Equipment::findOrFail($id);
 
-            $query = Rental::whereNotNull('end_date');
+            $query = Rental::whereNotNull('end_date'); 
+            //J'ai pensé qu'il ne serait pas logique de chercher une location qui n'était pas fini parce que le prix n'est pas final? 
+            //src: https://stackoverflow.com/questions/21281504/how-do-you-check-if-not-null-with-eloquent
             $query = $query->where('equipment_id', $id);
 
             if ($request->minDate) {
