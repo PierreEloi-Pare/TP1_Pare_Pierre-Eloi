@@ -14,8 +14,8 @@ class AveragePriceRequest extends FormRequest
     public function rules(): array
     {
          return [
-            'minDate' => 'nullable|date',
-            'maxDate' => 'nullable|date|after_or_equal:minDate', //https://laravel.com/docs/12.x/validation#rule-after-or-equal
+            'minDate' => 'nullable|date_format:Y-m-d', //https://stackoverflow.com/questions/50287823/validating-a-custom-date-format-in-with-laravel-validator
+            'maxDate' => 'nullable|date_format:Y-m-d|after:minDate', //https://laravel.com/docs/12.x/validation#rule-after
             'maxTotalPrice' => 'nullable|numeric|min:0'
         ];
     }

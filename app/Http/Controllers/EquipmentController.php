@@ -58,6 +58,7 @@ class EquipmentController extends Controller
 
     public function averagePrice(AveragePriceRequest $request, $id){
         try {
+            $request->validated();
             Equipment::findOrFail($id);
 
             $query = Rental::whereNotNull('end_date'); 
@@ -77,7 +78,7 @@ class EquipmentController extends Controller
                 $query->where('totalPrice', '<=', $request->maxTotalPrice);
             }
 
-            $avgPrice = $query->avg('totalPrice');
+            $avgPrice = $query->avg('total_price');
 
             $rentals = $query->paginate(20);
 
