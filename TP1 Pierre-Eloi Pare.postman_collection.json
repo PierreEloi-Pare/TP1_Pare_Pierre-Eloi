@@ -35,7 +35,45 @@
       "name": "Average Rental of equipment",
       "request": {
         "method": "GET",
-        "header": []
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/equipments/6/average-price?minDate=2&maxDate=2",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "equipments",
+            "6",
+            "average-price"
+          ],
+          "query": [
+            {
+              "key": "minDate",
+              "value": "2"
+            },
+            {
+              "key": "maxDate",
+              "value": "2"
+            }
+          ]
+        }
       },
       "response": []
     },
