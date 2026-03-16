@@ -1,0 +1,269 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Equipment Rental API",
+        "description": "Un API REST d'enregistrement de location d'équipement sportif.",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/equipments": {
+            "get": {
+                "tags": [
+                    "Equipments"
+                ],
+                "summary": "Liste de tous les équipements",
+                "operationId": "6ef4946ec56ce0f0c3e613f7c57d37f2",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "500": {
+                        "description": "Erreur du serveur à l'interne"
+                    }
+                }
+            }
+        },
+        "/api/equipments/{id}": {
+            "get": {
+                "tags": [
+                    "Equipments"
+                ],
+                "summary": "Afficher un seul équipement",
+                "operationId": "f5219eb4f4143cf304576feea563c147",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Equipment ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "404": {
+                        "description": "Invalid id"
+                    },
+                    "500": {
+                        "description": "Erreur du serveur à l'interne"
+                    }
+                }
+            }
+        },
+        "/api/equipments/{id}/popularity": {
+            "get": {
+                "tags": [
+                    "Equipments"
+                ],
+                "summary": "Calculer la popularité d’un équipement",
+                "operationId": "94d63691449447a23e6bcb722d6d5ac3",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Equipment ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Popularité calculée"
+                    },
+                    "404": {
+                        "description": "Invalid id"
+                    },
+                    "500": {
+                        "description": "Erreur du serveur à l'interne"
+                    }
+                }
+            }
+        },
+        "/api/equipments/{id}/average-price": {
+            "get": {
+                "tags": [
+                    "Equipments"
+                ],
+                "summary": "Prix moyen de location d’un équipement",
+                "operationId": "f0d37106f3a83c230f90a38b7b8c4b4b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Equipment ID",
+                        "required": true
+                    },
+                    {
+                        "name": "minDate",
+                        "in": "query",
+                        "description": "Date minimale",
+                        "required": false
+                    },
+                    {
+                        "name": "maxDate",
+                        "in": "query",
+                        "description": "Date maximale",
+                        "required": false
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Prix moyen calculé"
+                    },
+                    "404": {
+                        "description": "Invalid id"
+                    },
+                    "500": {
+                        "description": "Erreur du serveur à l'interne"
+                    }
+                }
+            }
+        },
+        "/api/reviews/{id}": {
+            "delete": {
+                "tags": [
+                    "Reviews"
+                ],
+                "summary": "Supprimer un avis",
+                "operationId": "89986343b5dbd2b909c2764aeb7e4096",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Review ID",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Avis supprimé"
+                    },
+                    "404": {
+                        "description": "Avis non trouvé"
+                    },
+                    "500": {
+                        "description": "Erreur du serveur à l'interne"
+                    }
+                }
+            }
+        },
+        "/api/users": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Créer un utilisateur",
+                "operationId": "592819a0265360b2014512d6dbfaf0e7",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "firstName": {
+                                        "type": "string",
+                                        "example": "MICHELLE"
+                                    },
+                                    "lastName": {
+                                        "type": "string",
+                                        "example": "LE DEVOREUR DE PHP"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "email@test.com"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "999-999-9999"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Utilisateur créé"
+                    },
+                    "422": {
+                        "description": "Données invalides"
+                    },
+                    "500": {
+                        "description": "Erreur du serveur à l'interne"
+                    }
+                }
+            }
+        },
+        "/api/users/{id}": {
+            "put": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Modifier un utilisateur",
+                "operationId": "b9091397c8b25f12c6adb74be6ce3a5a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User ID",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "firstName": {
+                                        "type": "string",
+                                        "example": "MICHELLE"
+                                    },
+                                    "lastName": {
+                                        "type": "string",
+                                        "example": "LE DEVOREUR DE PHP"
+                                    },
+                                    "email": {
+                                        "type": "string",
+                                        "example": "email@test.com"
+                                    },
+                                    "phone": {
+                                        "type": "string",
+                                        "example": "999-999-9999"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Utilisateur modifié"
+                    },
+                    "404": {
+                        "description": "Utilisateur non trouvé"
+                    },
+                    "500": {
+                        "description": "Erreur du serveur à l'interne"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Equipments",
+            "description": "Equipments"
+        },
+        {
+            "name": "Reviews",
+            "description": "Reviews"
+        },
+        {
+            "name": "Users",
+            "description": "Users"
+        }
+    ]
+}
