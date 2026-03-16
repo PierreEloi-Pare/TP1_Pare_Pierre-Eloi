@@ -117,6 +117,8 @@ class EquipmentController extends Controller
                 required: true
             ),
 
+            //https://swagger.io/docs/specification/v3_0/describing-parameters/#query-parameters
+
             new OA\Parameter(
                 name: "minDate",
                 description: "Date minimale",
