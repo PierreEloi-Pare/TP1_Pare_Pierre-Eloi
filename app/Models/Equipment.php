@@ -27,14 +27,14 @@ class Equipment extends Model
         return $this->belongsToMany(
             Sport::class,
             'equipment_sport',
-            'equipmentId',
+            'equipment_id',
             'sportId'
         );
     }
 
     public function rentals()
     {
-        return $this->hasMany(Rental::class, 'equipmentId');
+        return $this->hasMany(Rental::class, 'equipment_id');
     }
 
 }
